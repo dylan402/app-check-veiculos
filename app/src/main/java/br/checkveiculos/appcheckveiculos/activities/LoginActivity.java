@@ -3,7 +3,9 @@ package br.checkveiculos.appcheckveiculos.activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +24,7 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     private ClienteService clienteService;
+    private SharedPreferences sharedPreferences;
     private TextView textViewCadastro;
     private AppCompatButton buttonEntrar;
 
@@ -32,13 +35,11 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        this.iniciarServices();
+        this.clienteService = RestServiceGenerator.createService(ClienteService.class);
+        this.sharedPreferences = getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
+
         this.iniciarComponentes();
         this.iniciarListeners();
-    }
-
-    private void iniciarServices() {
-        this.clienteService = RestServiceGenerator.createService(ClienteService.class);
     }
 
     private void iniciarComponentes() {
@@ -104,6 +105,11 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i("ClienteService", "Cliente logado com sucesso.");
                     Log.i("teste", "" + response.body().toString());
+
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("id", response.body().getId());
+
+                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 } else {
                     Log.e("ClienteService", "" + response.message());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
