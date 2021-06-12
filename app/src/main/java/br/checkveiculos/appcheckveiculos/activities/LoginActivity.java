@@ -1,17 +1,29 @@
 package br.checkveiculos.appcheckveiculos.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import br.checkveiculos.appcheckveiculos.R;
+import br.checkveiculos.appcheckveiculos.api.ClienteService;
+import br.checkveiculos.appcheckveiculos.api.RestServiceGenerator;
+import br.checkveiculos.appcheckveiculos.entidades.Cliente;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private TextView textViewCadastro ;
+    private ClienteService clienteService;
+    private TextView textViewCadastro;
+    private AppCompatButton buttonEntrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,20 +31,88 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         getSupportActionBar().hide();
+
+        this.iniciarServices();
         this.iniciarComponentes();
         this.iniciarListeners();
     }
 
+    private void iniciarServices() {
+        this.clienteService = RestServiceGenerator.createService(ClienteService.class);
+    }
+
     private void iniciarComponentes() {
         this.textViewCadastro = findViewById(R.id.textViewCadastro);
+        this.buttonEntrar = findViewById(R.id.buttonEntrar);
     }
 
     private void iniciarListeners() {
         this.textViewCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, CadastroActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
+            }
+        });
+
+        this.buttonEntrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+            }
+        });
+    }
+
+    private Cliente recuperaInformacoesFormulario () {
+        Cliente cliente = new Cliente();
+
+        EditText email = findViewById(R.id.editTextEmail);
+        EditText senha = findViewById(R.id.editTextSenha);
+
+        cliente.setEmail(email.getText().toString());
+        cliente.setSenha(senha.getText().toString());
+
+        return cliente;
+    }
+
+    private boolean validarFormulario(Cliente cliente) {
+        boolean valido = true;
+
+        if (cliente.getEmail() == null || cliente.getEmail().trim().length() == 0) {
+            valido = false;
+        }
+
+        if (cliente.getSenha() == null || cliente.getSenha().trim().length() == 0) {
+            valido = false;
+        }
+
+        return valido;
+    }
+
+    private void login() {
+        Cliente cliente = this.recuperaInformacoesFormulario();
+
+        if (!this.validarFormulario(cliente)) {
+            Toast.makeText(getApplicationContext(), "Preencha com os seus dados de acesso.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<Cliente> call = this.clienteService.login(cliente);
+
+        call.enqueue(new Callback<Cliente>() {
+            @Override
+            public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                if (response.isSuccessful()) {
+                    Log.i("ClienteService", "Cliente logado com sucesso.");
+                    Log.i("teste", "" + response.body().toString());
+                } else {
+                    Log.e("ClienteService", "" + response.message());
+                    Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Cliente> call, Throwable t) {
+                Log.e("Error", "" + t.getMessage());
             }
         });
     }

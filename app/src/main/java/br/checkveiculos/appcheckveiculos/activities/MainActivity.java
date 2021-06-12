@@ -16,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        Intent loginIntent = new Intent(this, LoginActivity.class);
-        startActivity(loginIntent);
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }
