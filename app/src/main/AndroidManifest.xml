@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCheckVeiculos"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.CadastroActivity" />
         <activity android:name=".activities.LoginActivity" />
         <activity android:name=".activities.MainActivity">
             <intent-filter>

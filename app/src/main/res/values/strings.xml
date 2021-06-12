@@ -3,4 +3,5 @@
     <string name="app_check_veiculos">App Check Veiculos</string>
     <string name="login_entrar">Entrar</string>
     <string name="login_text_cadastro">Crie sua conta</string>
+    <string name="cadastro_text_cadastro">Cadastrar!</string>
 </resources>
