@@ -25,7 +25,7 @@
         />
 
     <View
-        android:id="@+id/clienteContainerComponents"
+        android:id="@+id/loginContainerComponents"
         style="@style/ContainerComponents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -40,9 +40,9 @@
         android:drawableRight="@drawable/ic_email"
         android:inputType="textEmailAddress"
         android:maxLength="35"
-        app:layout_constraintStart_toStartOf="@id/clienteContainerComponents"
-        app:layout_constraintEnd_toEndOf="@+id/clienteContainerComponents"
-        app:layout_constraintTop_toTopOf="@id/clienteContainerComponents"
+        app:layout_constraintStart_toStartOf="@id/loginContainerComponents"
+        app:layout_constraintEnd_toEndOf="@+id/loginContainerComponents"
+        app:layout_constraintTop_toTopOf="@id/loginContainerComponents"
         />
 
     <EditText
@@ -52,8 +52,8 @@
         android:drawableRight="@drawable/ic_eye"
         android:inputType="textPassword"
         android:maxLength="20"
-        app:layout_constraintStart_toStartOf="@id/clienteContainerComponents"
-        app:layout_constraintEnd_toEndOf="@+id/clienteContainerComponents"
+        app:layout_constraintStart_toStartOf="@id/loginContainerComponents"
+        app:layout_constraintEnd_toEndOf="@+id/loginContainerComponents"
         app:layout_constraintTop_toBottomOf="@+id/loginEditTextEmail"
         />
 
@@ -89,7 +89,7 @@
         android:layout_marginBottom="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginProgressBar"
+        app:layout_constraintTop_toBottomOf="@+id/loginContainerComponents"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

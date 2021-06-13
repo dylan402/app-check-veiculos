@@ -95,11 +95,11 @@ public class LoginActivity extends AppCompatActivity {
         ProgressBar loginProgressBar = findViewById(R.id.loginProgressBar);
 
         if (exibir == true) {
-            loginButtonEntrar.setEnabled(false);
+            loginButtonEntrar.setVisibility(View.GONE);
             loginProgressBar.setVisibility(View.VISIBLE);
         } else {
-            loginButtonEntrar.setEnabled(true);
-            loginProgressBar.setVisibility(View.INVISIBLE);
+            loginButtonEntrar.setVisibility(View.VISIBLE);
+            loginProgressBar.setVisibility(View.GONE);
         }
     }
 
