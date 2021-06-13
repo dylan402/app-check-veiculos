@@ -27,7 +27,7 @@
         />
 
     <View
-        android:id="@+id/clienteContainerComponents"
+        android:id="@+id/cadastroContainerComponents"
         style="@style/ContainerComponents"
         android:layout_height="350dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/clienteContainerComponents"
+        app:layout_constraintTop_toTopOf="@id/cadastroContainerComponents"
         />
 
     <EditText
