@@ -19,7 +19,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import br.checkveiculos.appcheckveiculos.R;
@@ -37,8 +36,6 @@ public class VeiculosFragment extends Fragment {
     private FragmentVeiculosBinding binding;
     private VeiculoService veiculoService;
     private SharedPreferences sharedPreferences;
-
-    private List<Veiculo> veiculos = new ArrayList<Veiculo>();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -100,8 +97,7 @@ public class VeiculosFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.i("VeiculoService", "Retornou " + response.body().size() + " veículos.");
 
-                    veiculos = response.body();
-
+                    List<Veiculo> veiculos = response.body();
                     ListView listViewVeiculos = binding.listViewVeiculos;
 
                     VeiculosAdapter veiculosAdapter = new VeiculosAdapter(getActivity(), veiculos);
