@@ -100,7 +100,9 @@ public class FormCadastroActivity extends AppCompatActivity {
                     editor.putString("id", response.body().getId());
                     editor.commit();
 
-                    startActivity(new Intent(FormCadastroActivity.this, MainActivity.class));
+                    Intent intent = new Intent(FormCadastroActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } else {
                     Log.e("ClienteService", "" + response.toString());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();

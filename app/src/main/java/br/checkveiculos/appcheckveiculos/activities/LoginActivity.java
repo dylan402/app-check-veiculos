@@ -110,7 +110,9 @@ public class LoginActivity extends AppCompatActivity {
                     editor.putString("id", response.body().getId());
                     editor.commit();
 
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } else {
                     Log.e("ClienteService", "" + response.message());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
