@@ -25,7 +25,7 @@
         />
 
     <View
-        android:id="@+id/containerComponents"
+        android:id="@+id/clienteContainerComponents"
         style="@style/ContainerComponents"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -40,9 +40,9 @@
         android:drawableRight="@drawable/ic_email"
         android:inputType="textEmailAddress"
         android:maxLength="35"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@+id/containerComponents"
-        app:layout_constraintTop_toTopOf="@id/containerComponents"
+        app:layout_constraintStart_toStartOf="@id/clienteContainerComponents"
+        app:layout_constraintEnd_toEndOf="@+id/clienteContainerComponents"
+        app:layout_constraintTop_toTopOf="@id/clienteContainerComponents"
         />
 
     <EditText
@@ -52,8 +52,8 @@
         android:drawableRight="@drawable/ic_eye"
         android:inputType="textPassword"
         android:maxLength="20"
-        app:layout_constraintStart_toStartOf="@id/containerComponents"
-        app:layout_constraintEnd_toEndOf="@+id/containerComponents"
+        app:layout_constraintStart_toStartOf="@id/clienteContainerComponents"
+        app:layout_constraintEnd_toEndOf="@+id/clienteContainerComponents"
         app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
         />
 
@@ -74,7 +74,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/containerComponents"
+        app:layout_constraintTop_toBottomOf="@+id/clienteContainerComponents"
         />
 
     <TextView

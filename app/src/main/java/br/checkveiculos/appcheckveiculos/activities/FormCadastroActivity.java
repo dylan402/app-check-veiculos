@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import br.checkveiculos.appcheckveiculos.R;
@@ -21,44 +20,30 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LoginActivity extends AppCompatActivity {
-
+public class FormCadastroActivity extends AppCompatActivity {
     private ClienteService clienteService;
     private SharedPreferences sharedPreferences;
-    private TextView textViewCadastro;
-    private AppCompatButton buttonEntrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_form_cadastro);
 
         getSupportActionBar().hide();
 
         this.clienteService = RestServiceGenerator.createServiceCliente(ClienteService.class);
         this.sharedPreferences = getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
 
-        this.iniciarComponentes();
         this.iniciarListeners();
     }
 
-    private void iniciarComponentes() {
-        this.textViewCadastro = findViewById(R.id.textViewCadastro);
-        this.buttonEntrar = findViewById(R.id.buttonEntrar);
-    }
-
     private void iniciarListeners() {
-        this.textViewCadastro.setOnClickListener(new View.OnClickListener() {
+        AppCompatButton buttonCadastrar = findViewById(R.id.clienteButtonCadastrar);
+        buttonCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, FormCadastroActivity.class));
-            }
-        });
-
-        this.buttonEntrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
+                Cliente cliente = recuperaInformacoesFormulario();
+                criarCliente(cliente);
             }
         });
     }
@@ -66,9 +51,11 @@ public class LoginActivity extends AppCompatActivity {
     private Cliente recuperaInformacoesFormulario () {
         Cliente cliente = new Cliente();
 
-        EditText email = findViewById(R.id.editTextEmail);
-        EditText senha = findViewById(R.id.editTextSenha);
+        EditText nome = findViewById(R.id.clienteEditTextNome);
+        EditText email = findViewById(R.id.clienteEditTextEmail);
+        EditText senha = findViewById(R.id.clienteEditTextSenha);
 
+        cliente.setNome(nome.getText().toString());
         cliente.setEmail(email.getText().toString());
         cliente.setSenha(senha.getText().toString());
 
@@ -77,6 +64,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean validarFormulario(Cliente cliente) {
         boolean valido = true;
+
+        if (cliente.getNome() == null || cliente.getNome().trim().length() == 0) {
+            valido = false;
+        }
 
         if (cliente.getEmail() == null || cliente.getEmail().trim().length() == 0) {
             valido = false;
@@ -89,30 +80,29 @@ public class LoginActivity extends AppCompatActivity {
         return valido;
     }
 
-    private void login() {
-        Cliente cliente = this.recuperaInformacoesFormulario();
-
+    private void criarCliente(Cliente cliente) {
         if (!this.validarFormulario(cliente)) {
-            Toast.makeText(getApplicationContext(), "Preencha com os seus dados de acesso.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Call<Cliente> call = this.clienteService.login(cliente);
+        Call<Cliente> call = this.clienteService.criarCliente(cliente);
 
         call.enqueue(new Callback<Cliente>() {
             @Override
             public void onResponse(Call<Cliente> call, Response<Cliente> response) {
                 if (response.isSuccessful()) {
-                    Log.i("ClienteService", "Cliente logado com sucesso.");
-                    Log.i("teste", "" + response.body().toString());
+                    Log.i("ClienteService", "Cliente criado com sucesso.");
+
+                    Toast.makeText(getApplicationContext(), "Cadastro concluído com sucesso.", Toast.LENGTH_LONG).show();
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id", response.body().getId());
                     editor.commit();
 
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    startActivity(new Intent(FormCadastroActivity.this, MainActivity.class));
                 } else {
-                    Log.e("ClienteService", "" + response.message());
+                    Log.e("ClienteService", "" + response.toString());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
