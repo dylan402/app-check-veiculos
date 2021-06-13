@@ -4,5 +4,7 @@
         android:startColor="@color/orange_top"
         android:centerColor="@color/orange_center"
         android:endColor="@color/orange_bottom"
-        android:angle="120" />
+        android:angle="120"
+        android:type="linear"
+        />
 </shape>
