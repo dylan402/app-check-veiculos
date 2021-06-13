@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import br.checkveiculos.appcheckveiculos.R;
@@ -80,6 +81,19 @@ public class FormCadastroActivity extends AppCompatActivity {
         return valido;
     }
 
+    private void exibirLoading(boolean exibir) {
+        ProgressBar clienteProgressBar = findViewById(R.id.clienteProgressBar);
+        AppCompatButton clienteButtonCadastrar = findViewById(R.id.clienteButtonCadastrar);
+
+        if (exibir) {
+            clienteButtonCadastrar.setVisibility(View.GONE);
+            clienteProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            clienteProgressBar.setVisibility(View.GONE);
+            clienteButtonCadastrar.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void criarCliente(Cliente cliente) {
         if (!this.validarFormulario(cliente)) {
             Toast.makeText(getApplicationContext(), "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
@@ -87,6 +101,7 @@ public class FormCadastroActivity extends AppCompatActivity {
         }
 
         Call<Cliente> call = this.clienteService.criarCliente(cliente);
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<Cliente>() {
             @Override
@@ -103,7 +118,9 @@ public class FormCadastroActivity extends AppCompatActivity {
                     Intent intent = new Intent(FormCadastroActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    exibirLoading(false);
                 } else {
+                    exibirLoading(false);
                     Log.e("ClienteService", "" + response.toString());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -111,6 +128,7 @@ public class FormCadastroActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Cliente> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
