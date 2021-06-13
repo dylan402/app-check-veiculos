@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void iniciarComponentes() {
         this.textViewCadastro = findViewById(R.id.textViewCadastro);
-        this.buttonEntrar = findViewById(R.id.buttonEntrar);
+        this.buttonEntrar = findViewById(R.id.loginButtonEntrar);
     }
 
     private void iniciarListeners() {
@@ -89,6 +90,19 @@ public class LoginActivity extends AppCompatActivity {
         return valido;
     }
 
+    private void exibirLoading(boolean exibir) {
+        AppCompatButton loginButtonEntrar = findViewById(R.id.loginButtonEntrar);
+        ProgressBar loginProgressBar = findViewById(R.id.loginProgressBar);
+
+        if (exibir == true) {
+            loginButtonEntrar.setEnabled(false);
+            loginProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            loginButtonEntrar.setEnabled(true);
+            loginProgressBar.setVisibility(View.INVISIBLE);
+        }
+    }
+
     private void login() {
         Cliente cliente = this.recuperaInformacoesFormulario();
 
@@ -98,6 +112,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         Call<Cliente> call = this.clienteService.login(cliente);
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<Cliente>() {
             @Override
@@ -111,9 +126,11 @@ public class LoginActivity extends AppCompatActivity {
                     editor.commit();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    exibirLoading(false);
                 } else {
+                    exibirLoading(false);
                     Log.e("ClienteService", "" + response.message());
                     Toast.makeText(getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -121,6 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Cliente> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
