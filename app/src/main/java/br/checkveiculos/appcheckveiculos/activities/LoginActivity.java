@@ -123,6 +123,8 @@ public class LoginActivity extends AppCompatActivity {
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id", response.body().getId());
+                    editor.putString("nome", response.body().getNome());
+                    editor.putString("email", response.body().getEmail());
                     editor.commit();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

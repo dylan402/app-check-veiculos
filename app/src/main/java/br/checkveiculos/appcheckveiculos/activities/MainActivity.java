@@ -4,20 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Menu;
-import android.widget.Toast;
+import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.navigation.NavigationView;
 
 import br.checkveiculos.appcheckveiculos.R;
 import br.checkveiculos.appcheckveiculos.databinding.ActivityMainBinding;
@@ -49,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        this.preencherHeaderMenu();
     }
 
     @Override
@@ -72,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_sair:
                 SharedPreferences.Editor editor = this.sharedPreferences.edit();
                 editor.remove("id");
+                editor.remove("nome");
+                editor.remove("email");
                 editor.commit();
 
                 finish();
@@ -80,5 +83,14 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void preencherHeaderMenu() {
+        View navHeader = this.binding.navView.getHeaderView(0);
+        TextView clienteNome = navHeader.findViewById(R.id.menuClienteNome);
+        TextView clienteEmail = navHeader.findViewById(R.id.menuClienteEmail);
+
+        clienteNome.setText(this.sharedPreferences.getString("nome", ""));
+        clienteEmail.setText(this.sharedPreferences.getString("email", ""));
     }
 }

@@ -113,6 +113,8 @@ public class FormCadastroActivity extends AppCompatActivity {
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("id", response.body().getId());
+                    editor.putString("nome", response.body().getNome());
+                    editor.putString("email", response.body().getEmail());
                     editor.commit();
 
                     Intent intent = new Intent(FormCadastroActivity.this, MainActivity.class);
