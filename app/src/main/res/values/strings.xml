@@ -15,4 +15,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_veiculos">Meus veículos</string>
+
+    <string name="veiculo_title_cadastro">Novo veículo</string>
+    <string name="veiculo_text_cadastro">Cadastrar!</string>
 </resources>

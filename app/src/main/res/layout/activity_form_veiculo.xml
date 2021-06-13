@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroud"
+    tools:context=".activities.FormVeiculoActivity">
+
+    <TextView
+        android:id="@+id/textViewCadastro"
+        android:text="@string/veiculo_title_cadastro"
+        android:textColor="@color/white"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <View
+        android:id="@+id/containerComponents"
+        style="@style/ContainerComponents"
+        android:layout_height="410dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewCadastro" />
+
+    <EditText
+        android:id="@+id/editTextModelo"
+        android:hint="Digite a marca"
+        style="@style/EditText"
+        android:drawableEnd="@drawable/ic_marca"
+        android:inputType="text"
+        android:layout_marginTop="25dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/containerComponents"
+        />
+
+    <EditText
+        android:id="@+id/editTextMarca"
+        android:hint="Digite o modelo"
+        style="@style/EditText"
+        android:drawableEnd="@drawable/ic_veiculo"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextModelo"
+        />
+
+    <EditText
+        android:id="@+id/editTextAno"
+        android:hint="Digite o ano"
+        style="@style/EditText"
+        android:drawableEnd="@drawable/ic_agenda"
+        android:inputType="number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextMarca"
+        />
+
+    <EditText
+        android:id="@+id/editTextPlaca"
+        android:hint="Digite a placa"
+        style="@style/EditText"
+        android:drawableEnd="@drawable/ic_placa"
+        android:inputType="text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextAno"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonCadastrarVeiculo"
+        style="@style/Button"
+        android:text="@string/veiculo_text_cadastro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextPlaca"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
