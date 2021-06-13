@@ -15,36 +15,36 @@ import retrofit2.http.Query;
 
 public interface VeiculoService {
     @Headers({
-        "Accept: application/json",
-        "User-Agent: AppCheckVeiculos"
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
     })
     @GET("veiculo")
     Call<List<Veiculo>> getVeiculos(@Query("idCliente") String idCliente);
 
     @Headers({
-        "Accept: application/json",
-        "User-Agent: AppCheckVeiculos"
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
     })
     @GET("veiculo/{id}")
     Call<Veiculo> getVeiculo(@Path("id") String id);
 
     @Headers({
-        "Accept: application/json",
-        "User-Agent: AppCheckVeiculos"
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
     })
     @POST("veiculo")
     Call<Veiculo> criarVeiculo(@Body Veiculo veiculo);
 
     @Headers({
-        "Accept: application/json",
-        "User-Agent: AppCheckVeiculos"
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
     })
     @PUT("veiculo/{id}")
     Call<Veiculo> atualizarVeiculo(@Path("id") String id, @Body Veiculo veiculo);
 
     @Headers({
-        "Accept: application/json",
-        "User-Agent: AppCheckVeiculos"
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
     })
     @DELETE("veiculo/{id}")
     Call<Boolean> deletarVeiculo(@Path("id") String id);

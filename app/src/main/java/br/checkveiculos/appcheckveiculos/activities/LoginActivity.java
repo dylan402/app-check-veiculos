@@ -1,8 +1,5 @@
 package br.checkveiculos.appcheckveiculos.activities;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +10,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import br.checkveiculos.appcheckveiculos.R;
 import br.checkveiculos.appcheckveiculos.api.ClienteService;
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private Cliente recuperaInformacoesFormulario () {
+    private Cliente recuperaInformacoesFormulario() {
         Cliente cliente = new Cliente();
 
         EditText email = findViewById(R.id.loginEditTextEmail);
