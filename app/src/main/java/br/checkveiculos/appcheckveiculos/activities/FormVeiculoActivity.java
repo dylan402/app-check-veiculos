@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,10 +47,10 @@ public class FormVeiculoActivity extends AppCompatActivity {
         if (intent.getSerializableExtra("veiculo") != null) {
             Veiculo veiculo = (Veiculo) intent.getSerializableExtra("veiculo");
 
-            EditText marca = findViewById(R.id.editTextMarca);
-            EditText modelo = findViewById(R.id.editTextModelo);
-            EditText ano = findViewById(R.id.editTextAno);
-            EditText placa = findViewById(R.id.editTextPlaca);
+            EditText marca = findViewById(R.id.veiculoEditTextMarca);
+            EditText modelo = findViewById(R.id.veiculoEditTextModelo);
+            EditText ano = findViewById(R.id.veiculoEditTextAno);
+            EditText placa = findViewById(R.id.veiculoEditTextPlaca);
 
             marca.setText(veiculo.getMarca());
             modelo.setText(veiculo.getModelo());
@@ -62,7 +63,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
     }
 
     private void iniciarListeners() {
-        AppCompatButton buttonCadastrarVeiculo = findViewById(R.id.buttonCadastrarVeiculo);
+        AppCompatButton buttonCadastrarVeiculo = findViewById(R.id.veiculoButtonCadastrar);
         buttonCadastrarVeiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +82,10 @@ public class FormVeiculoActivity extends AppCompatActivity {
     private Veiculo recuperaInformacoesFormulario () {
         Veiculo veiculo = new Veiculo();
 
-        EditText marca = findViewById(R.id.editTextMarca);
-        EditText modelo = findViewById(R.id.editTextModelo);
-        EditText ano = findViewById(R.id.editTextAno);
-        EditText placa = findViewById(R.id.editTextPlaca);
+        EditText marca = findViewById(R.id.veiculoEditTextMarca);
+        EditText modelo = findViewById(R.id.veiculoEditTextModelo);
+        EditText ano = findViewById(R.id.veiculoEditTextAno);
+        EditText placa = findViewById(R.id.veiculoEditTextPlaca);
 
         this.sharedPreferences = this.getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
         String idCliente = this.sharedPreferences.getString("id", "");
@@ -125,6 +126,19 @@ public class FormVeiculoActivity extends AppCompatActivity {
         return valido;
     }
 
+    private void exibirLoading(boolean exibir) {
+        ProgressBar veiculoProgressBar = findViewById(R.id.veiculoProgressBar);
+        AppCompatButton veiculoButtonCadastrar = findViewById(R.id.veiculoButtonCadastrar);
+
+        if (exibir) {
+            veiculoButtonCadastrar.setVisibility(View.GONE);
+            veiculoProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            veiculoProgressBar.setVisibility(View.GONE);
+            veiculoButtonCadastrar.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void criarVeiculo(Veiculo veiculo) {
         if (!this.validarFormulario(veiculo)) {
             Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
@@ -132,6 +146,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
         }
 
         Call<Veiculo> call = this.veiculoService.criarVeiculo(veiculo);
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<Veiculo>() {
             @Override
@@ -142,6 +157,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
 
                     finish();
                 } else {
+                    exibirLoading(false);
                     Log.e("VeiculoService", "Erro: " + response.message());
                     Toast.makeText(getApplicationContext(), "Erro:" + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -149,6 +165,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Veiculo> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
@@ -168,6 +185,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
         }
 
         Call<Veiculo> call = this.veiculoService.atualizarVeiculo(veiculo.getId(), veiculo);
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<Veiculo>() {
             @Override
@@ -178,6 +196,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
 
                     finish();
                 } else {
+                    exibirLoading(false);
                     Log.e("VeiculoService", "Erro: " + response.message());
                     Toast.makeText(getApplicationContext(), "Erro:" + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -185,6 +204,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<Veiculo> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
