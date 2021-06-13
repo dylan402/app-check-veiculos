@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.checkveiculos.appcheckveiculos.R;
-import br.checkveiculos.appcheckveiculos.activities.FormVeiculoActivity;
 import br.checkveiculos.appcheckveiculos.api.RestServiceGenerator;
 import br.checkveiculos.appcheckveiculos.api.VeiculoService;
 import br.checkveiculos.appcheckveiculos.databinding.FragmentVeiculosBinding;

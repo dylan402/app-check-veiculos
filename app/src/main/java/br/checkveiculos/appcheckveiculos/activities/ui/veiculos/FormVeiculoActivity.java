@@ -1,4 +1,4 @@
-package br.checkveiculos.appcheckveiculos.activities;
+package br.checkveiculos.appcheckveiculos.activities.ui.veiculos;
 
 import android.content.Context;
 import android.content.Intent;

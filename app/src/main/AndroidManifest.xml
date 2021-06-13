@@ -24,7 +24,7 @@
             android:name=".activities.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.AppCheckVeiculos.NoActionBar" />
-        <activity android:name=".activities.FormVeiculoActivity" />
+        <activity android:name=".activities.ui.veiculos.FormVeiculoActivity" />
     </application>
 
 </manifest>
