@@ -1,103 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:fillViewport="true">
 
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/backgroud"
-    tools:context=".activities.ui.veiculos.FormVeiculoActivity">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backgroud"
+        tools:context=".activities.ui.veiculos.FormVeiculoActivity">
 
-    <TextView
-        android:id="@+id/veiculoTextViewCadastro"
-        android:text="@string/veiculo_title_cadastro"
-        android:textColor="@color/white"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        <TextView
+            android:id="@+id/veiculoTextViewCadastro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="@string/veiculo_title_cadastro"
+            android:textColor="@color/white"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/veiculoContainerComponents"
-        style="@style/ContainerComponents"
-        android:layout_height="410dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/veiculoTextViewCadastro" />
+        <View
+            android:id="@+id/veiculoContainerComponents"
+            style="@style/ContainerComponents"
+            android:layout_height="410dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/veiculoTextViewCadastro" />
 
-    <EditText
-        android:id="@+id/veiculoEditTextMarca"
-        android:hint="Digite a marca"
-        style="@style/EditText"
-        android:drawableEnd="@drawable/ic_marca"
-        android:inputType="text"
-        android:layout_marginTop="25dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/veiculoContainerComponents"
-        />
+        <EditText
+            android:id="@+id/veiculoEditTextMarca"
+            style="@style/EditText"
+            android:layout_marginTop="25dp"
+            android:drawableEnd="@drawable/ic_marca"
+            android:hint="Digite a marca"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/veiculoContainerComponents" />
 
-    <EditText
-        android:id="@+id/veiculoEditTextModelo"
-        android:hint="Digite o modelo"
-        style="@style/EditText"
-        android:drawableEnd="@drawable/ic_veiculo"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextMarca"
-        />
+        <EditText
+            android:id="@+id/veiculoEditTextModelo"
+            style="@style/EditText"
+            android:drawableEnd="@drawable/ic_veiculo"
+            android:hint="Digite o modelo"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/veiculoEditTextMarca" />
 
-    <EditText
-        android:id="@+id/veiculoEditTextAno"
-        android:hint="Digite o ano"
-        style="@style/EditText"
-        android:drawableEnd="@drawable/ic_agenda"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextModelo"
-        />
+        <EditText
+            android:id="@+id/veiculoEditTextAno"
+            style="@style/EditText"
+            android:drawableEnd="@drawable/ic_agenda"
+            android:hint="Digite o ano"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/veiculoEditTextModelo" />
 
-    <EditText
-        android:id="@+id/veiculoEditTextPlaca"
-        android:hint="Digite a placa"
-        style="@style/EditText"
-        android:drawableEnd="@drawable/ic_placa"
-        android:inputType="text"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextAno"
-        />
+        <EditText
+            android:id="@+id/veiculoEditTextPlaca"
+            style="@style/EditText"
+            android:drawableEnd="@drawable/ic_placa"
+            android:hint="Digite a placa"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/veiculoEditTextAno" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/veiculoButtonCadastrar"
-        style="@style/Button"
-        android:text="@string/veiculo_text_cadastro"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextPlaca"
-        />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/veiculoButtonCadastrar"
+            style="@style/Button"
+            android:text="@string/veiculo_text_cadastro"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/veiculoEditTextPlaca" />
 
-    <ProgressBar
-        android:id="@+id/veiculoProgressBar"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/veiculoEditTextPlaca"
-        />
+        <ProgressBar
+            android:id="@+id/veiculoProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/veiculoEditTextPlaca" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
