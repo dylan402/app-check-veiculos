@@ -13,7 +13,7 @@
     tools:context=".activities.FormVeiculoActivity">
 
     <TextView
-        android:id="@+id/textViewCadastro"
+        android:id="@+id/veiculoTextViewCadastro"
         android:text="@string/veiculo_title_cadastro"
         android:textColor="@color/white"
         android:textSize="35sp"
@@ -32,7 +32,7 @@
         android:layout_height="410dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textViewCadastro" />
+        app:layout_constraintTop_toBottomOf="@id/veiculoTextViewCadastro" />
 
     <EditText
         android:id="@+id/editTextMarca"

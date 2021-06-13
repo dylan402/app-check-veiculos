@@ -56,7 +56,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
             ano.setText(veiculo.getAno());
             placa.setText(veiculo.getPlaca());
 
-            TextView titulo = findViewById(R.id.textViewCadastro);
+            TextView titulo = findViewById(R.id.veiculoTextViewCadastro);
             titulo.setText(R.string.veiculo_title_atualizar);
         }
     }
