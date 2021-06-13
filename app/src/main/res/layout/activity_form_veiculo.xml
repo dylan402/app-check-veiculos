@@ -27,7 +27,7 @@
         />
 
     <View
-        android:id="@+id/containerComponents"
+        android:id="@+id/veiculoContainerComponents"
         style="@style/ContainerComponents"
         android:layout_height="410dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/veiculoTextViewCadastro" />
 
     <EditText
-        android:id="@+id/editTextMarca"
+        android:id="@+id/veiculoEditTextMarca"
         android:hint="Digite a marca"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_marca"
@@ -43,49 +43,49 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/containerComponents"
+        app:layout_constraintTop_toTopOf="@id/veiculoContainerComponents"
         />
 
     <EditText
-        android:id="@+id/editTextModelo"
+        android:id="@+id/veiculoEditTextModelo"
         android:hint="Digite o modelo"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_veiculo"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextMarca"
+        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextMarca"
         />
 
     <EditText
-        android:id="@+id/editTextAno"
+        android:id="@+id/veiculoEditTextAno"
         android:hint="Digite o ano"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_agenda"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextModelo"
+        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextModelo"
         />
 
     <EditText
-        android:id="@+id/editTextPlaca"
+        android:id="@+id/veiculoEditTextPlaca"
         android:hint="Digite a placa"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_placa"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextAno"
+        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextAno"
         />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/buttonCadastrarVeiculo"
+        android:id="@+id/veiculoButtonCadastrar"
         style="@style/Button"
         android:text="@string/veiculo_text_cadastro"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextPlaca"
+        app:layout_constraintTop_toBottomOf="@id/veiculoEditTextPlaca"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
