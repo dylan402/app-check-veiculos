@@ -1,6 +1,8 @@
 package br.checkveiculos.appcheckveiculos.activities.ui.veiculos;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -102,14 +104,57 @@ public class VeiculosFragment extends Fragment {
                             startActivity(intent);
                         }
                     });
+
+                    listViewVeiculos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                        @Override
+                        public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                            Log.i("ListViewVeiculos", "Selecionou com clique longo o objeto de posição " + position);
+                            Veiculo veiculoSelecionado = (Veiculo) parent.getAdapter().getItem(position);
+
+                            new AlertDialog.Builder(parent.getContext())
+                                    .setTitle("Removendo veículo")
+                                    .setMessage("Tem certeza que deseja remover o veículo de placa " + veiculoSelecionado.getPlaca() + "?")
+                                    .setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            deletarVeiculo(veiculoSelecionado);
+                                        }
+                                    })
+                                    .setNegativeButton("Não", null).show();
+                            return true;
+                        }
+                    });
                 } else {
-                    Log.e("", "");
-                    Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG);
+                    Log.e("Error", "" + response.message());
+                    Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Veiculo>> call, Throwable t) {
+                Log.e("Error", "" + t.getMessage());
+            }
+        });
+    }
+
+    private void deletarVeiculo(Veiculo veiculo) {
+        Call<Boolean> call = this.veiculoService.deletarVeiculo(veiculo.getId());
+
+        call.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (response.isSuccessful()) {
+                    Log.i("VeiculoService", "Veículo removido com sucesso.");
+                    Toast.makeText(getContext().getApplicationContext(), "Veículo de placa " + veiculo.getPlaca() + " foi removido com sucesso.", Toast.LENGTH_SHORT).show();
+                    onResume();
+                } else {
+                    Log.e("Error", "" + response.message());
+                    Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 Log.e("Error", "" + t.getMessage());
             }
         });
