@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void iniciarComponentes() {
-        this.textViewCadastro = findViewById(R.id.textViewCadastro);
+        this.textViewCadastro = findViewById(R.id.loginTextViewCadastro);
         this.buttonEntrar = findViewById(R.id.loginButtonEntrar);
     }
 
@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity {
     private Cliente recuperaInformacoesFormulario () {
         Cliente cliente = new Cliente();
 
-        EditText email = findViewById(R.id.editTextEmail);
-        EditText senha = findViewById(R.id.editTextSenha);
+        EditText email = findViewById(R.id.loginEditTextEmail);
+        EditText senha = findViewById(R.id.loginEditTextSenha);
 
         cliente.setEmail(email.getText().toString());
         cliente.setSenha(senha.getText().toString());

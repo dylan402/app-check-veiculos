@@ -34,7 +34,7 @@
         />
 
     <EditText
-        android:id="@+id/editTextEmail"
+        android:id="@+id/loginEditTextEmail"
         style="@style/EditText"
         android:hint="Digite seu e-mail"
         android:drawableRight="@drawable/ic_email"
@@ -46,7 +46,7 @@
         />
 
     <EditText
-        android:id="@+id/editTextSenha"
+        android:id="@+id/loginEditTextSenha"
         style="@style/EditText"
         android:hint="Digite sua senha"
         android:drawableRight="@drawable/ic_eye"
@@ -54,7 +54,7 @@
         android:maxLength="20"
         app:layout_constraintStart_toStartOf="@id/clienteContainerComponents"
         app:layout_constraintEnd_toEndOf="@+id/clienteContainerComponents"
-        app:layout_constraintTop_toBottomOf="@+id/editTextEmail"
+        app:layout_constraintTop_toBottomOf="@+id/loginEditTextEmail"
         />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -63,22 +63,22 @@
         android:text="@string/login_entrar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextSenha"
+        app:layout_constraintTop_toBottomOf="@id/loginEditTextSenha"
         />
 
     <ProgressBar
         android:id="@+id/loginProgressBar"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clienteContainerComponents"
+        app:layout_constraintTop_toBottomOf="@+id/loginEditTextSenha"
         />
 
     <TextView
-        android:id="@+id/textViewCadastro"
+        android:id="@+id/loginTextViewCadastro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/login_text_cadastro"
