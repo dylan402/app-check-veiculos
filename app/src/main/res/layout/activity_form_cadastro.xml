@@ -13,7 +13,7 @@
     tools:context=".activities.FormCadastroActivity">
 
     <TextView
-        android:id="@+id/cadastroTextViewCadastro"
+        android:id="@+id/clienteTextViewCadastro"
         android:text="Cadastro"
         android:textColor="@color/white"
         android:textSize="45sp"
@@ -27,12 +27,12 @@
         />
 
     <View
-        android:id="@+id/cadastroContainerComponents"
+        android:id="@+id/clienteContainerComponents"
         style="@style/ContainerComponents"
         android:layout_height="350dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cadastroTextViewCadastro" />
+        app:layout_constraintTop_toBottomOf="@id/clienteTextViewCadastro" />
 
     <EditText
         android:id="@+id/clienteEditTextNome"
@@ -43,7 +43,7 @@
         android:layout_marginTop="25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/cadastroContainerComponents"
+        app:layout_constraintTop_toTopOf="@id/clienteContainerComponents"
         />
 
     <EditText
