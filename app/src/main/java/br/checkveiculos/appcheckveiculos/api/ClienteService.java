@@ -17,41 +17,41 @@ public interface ClienteService {
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @GET("cliente")
+    @GET("/cliente-api/cliente")
     Call<List<Cliente>> getClientes();
 
     @Headers({
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @GET("cliente/{id}")
+    @GET("/cliente-api/cliente/{id}")
     Call<Cliente> getCliente(@Path("id") String id);
 
     @Headers({
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @POST("cliente")
+    @POST("/cliente-api/cliente")
     Call<Cliente> criarCliente(@Body Cliente cliente);
 
     @Headers({
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @PUT("cliente/{id}")
+    @PUT("/cliente-api/cliente/{id}")
     Call<Cliente> atualizarCliente(@Path("id") String id, @Body Cliente Cliente);
 
     @Headers({
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @DELETE("cliente/{id}")
+    @DELETE("/cliente-api/cliente/{id}")
     Call<Boolean> deletarCliente(@Path("id") String id);
 
     @Headers({
             "Accept: application/json",
             "User-Agent: AppCheckVeiculos"
     })
-    @POST("cliente/login")
+    @POST("/cliente-api/cliente/login")
     Call<Cliente> login(@Body Cliente cliente);
 }
