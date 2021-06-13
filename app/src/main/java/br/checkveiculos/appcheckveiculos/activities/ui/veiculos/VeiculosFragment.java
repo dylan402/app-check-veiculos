@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -76,8 +77,22 @@ public class VeiculosFragment extends Fragment {
         });
     }
 
+    private void exibirLoading(boolean exibir) {
+        ListView listViewVeiculos = binding.listViewVeiculos;
+        ProgressBar fragmentVeiculosProgressBar = binding.fragmentVeiculosProgressBar;
+
+        if (exibir == true) {
+            listViewVeiculos.setVisibility(View.GONE);
+            fragmentVeiculosProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            listViewVeiculos.setVisibility(View.VISIBLE);
+            fragmentVeiculosProgressBar.setVisibility(View.GONE);
+        }
+    }
+
     private void buscarVeiculos() {
         Call<List<Veiculo>> call = this.veiculoService.getVeiculos(this.sharedPreferences.getString("id", ""));
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<List<Veiculo>>() {
             @Override
@@ -122,7 +137,10 @@ public class VeiculosFragment extends Fragment {
                             return true;
                         }
                     });
+
+                    exibirLoading(false);
                 } else {
+                    exibirLoading(false);
                     Log.e("Error", "" + response.message());
                     Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -130,6 +148,7 @@ public class VeiculosFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Veiculo>> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
@@ -137,6 +156,7 @@ public class VeiculosFragment extends Fragment {
 
     private void deletarVeiculo(Veiculo veiculo) {
         Call<Boolean> call = this.veiculoService.deletarVeiculo(veiculo.getId());
+        this.exibirLoading(true);
 
         call.enqueue(new Callback<Boolean>() {
             @Override
@@ -146,6 +166,7 @@ public class VeiculosFragment extends Fragment {
                     Toast.makeText(getContext().getApplicationContext(), "Veículo de placa " + veiculo.getPlaca() + " foi removido com sucesso.", Toast.LENGTH_SHORT).show();
                     onResume();
                 } else {
+                    exibirLoading(false);
                     Log.e("Error", "" + response.message());
                     Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                 }
@@ -153,6 +174,7 @@ public class VeiculosFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                exibirLoading(false);
                 Log.e("Error", "" + t.getMessage());
             }
         });
