@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -47,17 +48,10 @@ public class VeiculosFragment extends Fragment {
         this.veiculoService = RestServiceGenerator.createServiceVeiculo(VeiculoService.class);
         this.sharedPreferences = this.getActivity().getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
 
-        binding.floatingCadastrarVeiculo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getActivity(), FormVeiculoActivity.class));
-            }
-        });
-
         View root = binding.getRoot();
         View view = inflater.inflate(R.layout.fragment_veiculos, container, false);
 
-        buscarVeiculos();
+        this.iniciarListeners();
         return root;
     }
 
@@ -65,6 +59,21 @@ public class VeiculosFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        buscarVeiculos();
+    }
+
+    private void iniciarListeners() {
+        binding.floatingCadastrarVeiculo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getActivity(), FormVeiculoActivity.class));
+            }
+        });
     }
 
     private void buscarVeiculos() {
@@ -82,6 +91,17 @@ public class VeiculosFragment extends Fragment {
 
                     VeiculosAdapter veiculosAdapter = new VeiculosAdapter(getActivity(), veiculos);
                     listViewVeiculos.setAdapter(veiculosAdapter);
+
+                    listViewVeiculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Log.i("ListViewVeiculos", "Selecionou o objeto de posição " + position);
+                            Veiculo veiculoSelecionado = veiculos.get(position);
+                            Intent intent = new Intent(getActivity(), FormVeiculoActivity.class);
+                            intent.putExtra("veiculo", veiculoSelecionado);
+                            startActivity(intent);
+                        }
+                    });
                 } else {
                     Log.e("", "");
                     Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG);

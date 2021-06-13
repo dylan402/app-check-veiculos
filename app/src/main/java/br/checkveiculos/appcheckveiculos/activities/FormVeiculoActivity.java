@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import br.checkveiculos.appcheckveiculos.R;
@@ -35,6 +37,28 @@ public class FormVeiculoActivity extends AppCompatActivity {
         this.sharedPreferences = getApplicationContext().getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
 
         this.iniciarListeners();
+        this.iniciarVeiculo();
+    }
+
+    private void iniciarVeiculo() {
+        Intent intent = getIntent();
+
+        if (intent.getSerializableExtra("veiculo") != null) {
+            Veiculo veiculo = (Veiculo) intent.getSerializableExtra("veiculo");
+
+            EditText marca = findViewById(R.id.editTextMarca);
+            EditText modelo = findViewById(R.id.editTextModelo);
+            EditText ano = findViewById(R.id.editTextAno);
+            EditText placa = findViewById(R.id.editTextPlaca);
+
+            marca.setText(veiculo.getMarca());
+            modelo.setText(veiculo.getModelo());
+            ano.setText(veiculo.getAno());
+            placa.setText(veiculo.getPlaca());
+
+            TextView titulo = findViewById(R.id.textViewCadastro);
+            titulo.setText(R.string.veiculo_title_atualizar);
+        }
     }
 
     private void iniciarListeners() {
@@ -42,7 +66,14 @@ public class FormVeiculoActivity extends AppCompatActivity {
         buttonCadastrarVeiculo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                criarVeiculo();
+                Intent intent = getIntent();
+                Veiculo veiculo = recuperaInformacoesFormulario();
+
+                if (intent.getSerializableExtra("veiculo") == null) {
+                    criarVeiculo(veiculo);
+                } else {
+                    atualizarVeiculo(veiculo);
+                }
             }
         });
     }
@@ -94,9 +125,7 @@ public class FormVeiculoActivity extends AppCompatActivity {
         return valido;
     }
 
-    private void criarVeiculo() {
-        Veiculo veiculo = this.recuperaInformacoesFormulario();
-
+    private void criarVeiculo(Veiculo veiculo) {
         if (!this.validarFormulario(veiculo)) {
             Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
             return;
@@ -110,6 +139,42 @@ public class FormVeiculoActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     Log.i("VeiculoService", "Veículo criado com sucesso.");
                     Toast.makeText(getApplicationContext(), "Veículo criado com sucesso.", Toast.LENGTH_SHORT).show();
+
+                    finish();
+                } else {
+                    Log.e("VeiculoService", "Erro: " + response.message());
+                    Toast.makeText(getApplicationContext(), "Erro:" + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Veiculo> call, Throwable t) {
+                Log.e("Error", "" + t.getMessage());
+            }
+        });
+    }
+
+    private void atualizarVeiculo(Veiculo veiculo) {
+        Intent intent = getIntent();
+
+        Veiculo veiculoSelecionado = (Veiculo) intent.getSerializableExtra("veiculo");
+
+        veiculo.setId(veiculoSelecionado.getId());
+        veiculo.setIdCliente(veiculoSelecionado.getIdCliente());
+
+        if (!this.validarFormulario(veiculo)) {
+            Toast.makeText(this, "Preencha todos os campos.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Call<Veiculo> call = this.veiculoService.atualizarVeiculo(veiculo.getId(), veiculo);
+
+        call.enqueue(new Callback<Veiculo>() {
+            @Override
+            public void onResponse(Call<Veiculo> call, Response<Veiculo> response) {
+                if (response.isSuccessful()) {
+                    Log.i("VeiculoService", "Veículo atualizado com sucesso.");
+                    Toast.makeText(getApplicationContext(), "Veículo atualizado com sucesso.", Toast.LENGTH_SHORT).show();
 
                     finish();
                 } else {

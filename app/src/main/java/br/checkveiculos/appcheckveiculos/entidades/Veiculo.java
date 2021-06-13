@@ -1,8 +1,9 @@
 package br.checkveiculos.appcheckveiculos.entidades;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Veiculo {
+public class Veiculo implements Serializable {
     String id;
     String idCliente;
     String marca;

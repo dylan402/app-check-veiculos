@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@id/textViewCadastro" />
 
     <EditText
-        android:id="@+id/editTextModelo"
+        android:id="@+id/editTextMarca"
         android:hint="Digite a marca"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_marca"
@@ -47,14 +47,14 @@
         />
 
     <EditText
-        android:id="@+id/editTextMarca"
+        android:id="@+id/editTextModelo"
         android:hint="Digite o modelo"
         style="@style/EditText"
         android:drawableEnd="@drawable/ic_veiculo"
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextModelo"
+        app:layout_constraintTop_toBottomOf="@id/editTextMarca"
         />
 
     <EditText
@@ -65,7 +65,7 @@
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/editTextMarca"
+        app:layout_constraintTop_toBottomOf="@id/editTextModelo"
         />
 
     <EditText
