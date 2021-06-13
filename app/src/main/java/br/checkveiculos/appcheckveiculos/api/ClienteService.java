@@ -14,44 +14,44 @@ import retrofit2.http.Path;
 
 public interface ClienteService {
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @GET("/cliente-api/cliente")
+    @GET("cliente")
     Call<List<Cliente>> getClientes();
 
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @GET("/cliente-api/cliente/{id}")
+    @GET("cliente/{id}")
     Call<Cliente> getCliente(@Path("id") String id);
 
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @POST("/cliente-api/cliente")
+    @POST("cliente")
     Call<Cliente> criarCliente(@Body Cliente cliente);
 
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @PUT("/cliente-api/cliente/{id}")
+    @PUT("cliente/{id}")
     Call<Cliente> atualizarCliente(@Path("id") String id, @Body Cliente Cliente);
 
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @DELETE("/cliente-api/cliente/{id}")
+    @DELETE("cliente/{id}")
     Call<Boolean> deletarCliente(@Path("id") String id);
 
     @Headers({
-            "Accept: application/json",
-            "User-Agent: AppCheckVeiculos"
+        "Accept: application/json",
+        "User-Agent: AppCheckVeiculos"
     })
-    @POST("/cliente-api/cliente/login")
+    @POST("cliente/login")
     Call<Cliente> login(@Body Cliente cliente);
 }

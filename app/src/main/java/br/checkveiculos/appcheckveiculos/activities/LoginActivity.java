@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        this.clienteService = RestServiceGenerator.createService(ClienteService.class);
+        this.clienteService = RestServiceGenerator.createServiceCliente(ClienteService.class);
         this.sharedPreferences = getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
 
         this.iniciarComponentes();

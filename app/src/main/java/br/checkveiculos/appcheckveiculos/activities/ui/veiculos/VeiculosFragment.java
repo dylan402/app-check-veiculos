@@ -45,7 +45,7 @@ public class VeiculosFragment extends Fragment {
                 new ViewModelProvider(this).get(VeiculosViewModel.class);
 
         binding = FragmentVeiculosBinding.inflate(inflater, container, false);
-        this.veiculoService = RestServiceGenerator.createService(VeiculoService.class);
+        this.veiculoService = RestServiceGenerator.createServiceVeiculo(VeiculoService.class);
         this.sharedPreferences = this.getActivity().getSharedPreferences("ClienteData", Context.MODE_PRIVATE);
 
         View root = binding.getRoot();
