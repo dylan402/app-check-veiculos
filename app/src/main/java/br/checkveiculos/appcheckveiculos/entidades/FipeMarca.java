@@ -11,10 +11,7 @@ public class FipeMarca {
 
     @Override
     public String toString() {
-        return "FipeMarca{" +
-                "Label='" + Label + '\'' +
-                ", Value='" + Value + '\'' +
-                '}';
+        return this.getLabel();
     }
 
     @Override

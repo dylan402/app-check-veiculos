@@ -18,4 +18,10 @@
     <string name="veiculo_title_cadastro">Novo veículo</string>
     <string name="veiculo_title_atualizar">Atualizar veículo</string>
     <string name="veiculo_text_cadastro">Salvar</string>
+
+    <string name="fipe_text_mes_referencia">Mês de referência</string>
+    <string name="fipe_text_marca">Marca do veículo</string>
+    <string name="fipe_text_modelo">Modelo do veículo</string>
+    <string name="fipe_text_ano">Ano do veículo</string>
+    <string name="fipe_btn_consultar">Consultar</string>
 </resources>

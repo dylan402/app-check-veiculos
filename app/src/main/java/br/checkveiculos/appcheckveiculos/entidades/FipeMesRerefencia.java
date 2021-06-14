@@ -2,11 +2,11 @@ package br.checkveiculos.appcheckveiculos.entidades;
 
 import java.util.Objects;
 
-public class FipeAnoRerefencia {
+public class FipeMesRerefencia {
     private int Codigo;
     private String Mes;
 
-    public FipeAnoRerefencia() {
+    public FipeMesRerefencia() {
     }
 
     @Override
@@ -18,7 +18,7 @@ public class FipeAnoRerefencia {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        FipeAnoRerefencia that = (FipeAnoRerefencia) o;
+        FipeMesRerefencia that = (FipeMesRerefencia) o;
         return Codigo == that.Codigo &&
                 Objects.equals(Mes, that.Mes);
     }

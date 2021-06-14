@@ -1,12 +1,14 @@
 package br.checkveiculos.appcheckveiculos.entidades;
 
-public class FipeConsultarMarcas {
+public class FipeConsultarModelo {
     private int codigoTipoVeiculo;
     private int codigoTabelaReferencia;
+    private String codigoMarca;
 
-    public FipeConsultarMarcas(int codigoTipoVeiculo, int codigoTabelaReferencia) {
+    public FipeConsultarModelo(int codigoTipoVeiculo, int codigoTabelaReferencia, String codigoMarca) {
         this.codigoTipoVeiculo = codigoTipoVeiculo;
         this.codigoTabelaReferencia = codigoTabelaReferencia;
+        this.codigoMarca = codigoMarca;
     }
 
     public int getCodigoTipoVeiculo() {
@@ -23,5 +25,13 @@ public class FipeConsultarMarcas {
 
     public void setCodigoTabelaReferencia(int codigoTabelaReferencia) {
         this.codigoTabelaReferencia = codigoTabelaReferencia;
+    }
+
+    public String getCodigoMarca() {
+        return codigoMarca;
+    }
+
+    public void setCodigoMarca(String codigoMarca) {
+        this.codigoMarca = codigoMarca;
     }
 }
