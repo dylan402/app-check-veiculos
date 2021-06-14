@@ -20,7 +20,7 @@ import java.util.List;
 
 import br.checkveiculos.appcheckveiculos.api.FipeService;
 import br.checkveiculos.appcheckveiculos.api.RestServiceGenerator;
-import br.checkveiculos.appcheckveiculos.databinding.FragmentHomeBinding;
+import br.checkveiculos.appcheckveiculos.databinding.FragmentFipeConsultaBinding;
 import br.checkveiculos.appcheckveiculos.entidades.FipeAnoModelo;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMarca;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMesRerefencia;
@@ -31,10 +31,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class FipeConsultaFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
-    private FragmentHomeBinding binding;
+    private FipeConsultaViewModel fipeConsultaViewModel;
+    private FragmentFipeConsultaBinding binding;
     private FipeService fipeService;
 
     private FipeMesRerefencia mesRerefenciaSelecionado;
@@ -44,10 +44,10 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                new ViewModelProvider(this).get(HomeViewModel.class);
+        fipeConsultaViewModel =
+                new ViewModelProvider(this).get(FipeConsultaViewModel.class);
 
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentFipeConsultaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         this.fipeService = RestServiceGenerator.createServiceFipe(FipeService.class);

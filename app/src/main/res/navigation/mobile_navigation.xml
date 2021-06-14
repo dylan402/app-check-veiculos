@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/nav_fipe_consulta"
-        android:name="br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta.HomeFragment"
+        android:name="br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta.FipeConsultaFragment"
         android:label="@string/menu_fipe_consulta"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_fipe_consulta" />
 
 </navigation>
