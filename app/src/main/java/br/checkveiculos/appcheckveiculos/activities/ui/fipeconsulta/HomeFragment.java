@@ -1,4 +1,4 @@
-package br.checkveiculos.appcheckveiculos.activities.ui.home;
+package br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta;
 
 import android.os.Bundle;
 import android.util.Log;

@@ -12,9 +12,9 @@
         tools:layout="@layout/fragment_veiculos" />
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="br.checkveiculos.appcheckveiculos.activities.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:id="@+id/nav_fipe_consulta"
+        android:name="br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta.HomeFragment"
+        android:label="@string/menu_fipe_consulta"
         tools:layout="@layout/fragment_home" />
 
 </navigation>

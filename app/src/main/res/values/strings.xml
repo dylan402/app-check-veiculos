@@ -12,8 +12,8 @@
 
     <string name="action_sair">Sair</string>
 
-    <string name="menu_home">Home</string>
     <string name="menu_veiculos">Meus veículos</string>
+    <string name="menu_fipe_consulta">Consultar FIPE</string>
 
     <string name="veiculo_title_cadastro">Novo veículo</string>
     <string name="veiculo_title_atualizar">Atualizar veículo</string>

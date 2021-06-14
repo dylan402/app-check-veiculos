@@ -1,4 +1,4 @@
-package br.checkveiculos.appcheckveiculos.activities.ui.home;
+package br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
