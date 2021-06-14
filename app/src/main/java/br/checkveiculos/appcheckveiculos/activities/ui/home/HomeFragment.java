@@ -22,11 +22,10 @@ import br.checkveiculos.appcheckveiculos.api.FipeService;
 import br.checkveiculos.appcheckveiculos.api.RestServiceGenerator;
 import br.checkveiculos.appcheckveiculos.databinding.FragmentHomeBinding;
 import br.checkveiculos.appcheckveiculos.entidades.FipeAnoModelo;
-import br.checkveiculos.appcheckveiculos.entidades.FipeConsultarMarcas;
-import br.checkveiculos.appcheckveiculos.entidades.FipeConsultarModelo;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMarca;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMesRerefencia;
 import br.checkveiculos.appcheckveiculos.entidades.FipeModelo;
+import br.checkveiculos.appcheckveiculos.entidades.FipeRequestBody;
 import br.checkveiculos.appcheckveiculos.entidades.FipeResponseModelo;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,7 +56,6 @@ public class HomeFragment extends Fragment {
         binding.fipeSpinnerMarca.setTitle("Selecione uma marca");
         binding.fipeSpinnerModelo.setTitle("Selecione um modelo");
         binding.fipeSpinnerAno.setTitle("Selecione o ano do modelo");
-
 
         this.buscarMesesReferencia();
         return root;
@@ -122,9 +120,9 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        FipeConsultarMarcas fipeConsultarMarcas = new FipeConsultarMarcas(1, mesRerefenciaSelecionado.getCodigo());
+        FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo());
 
-        Call<List<FipeMarca>> call = this.fipeService.getMarcas(fipeConsultarMarcas);
+        Call<List<FipeMarca>> call = this.fipeService.getMarcas(fipeRequestBody);
 
         call.enqueue(new Callback<List<FipeMarca>>() {
             @Override
@@ -176,9 +174,9 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        FipeConsultarModelo fipeConsultarModelo = new FipeConsultarModelo(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue());
+        FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue());
 
-        Call<FipeResponseModelo> call = this.fipeService.getModelos(fipeConsultarModelo);
+        Call<FipeResponseModelo> call = this.fipeService.getModelos(fipeRequestBody);
 
         call.enqueue(new Callback<FipeResponseModelo>() {
             @Override
@@ -206,7 +204,7 @@ public class HomeFragment extends Fragment {
                             Log.i("onItemSelected", "Selecionou o modelo na posição " + position + ".");
                             if (position > 0) {
                                 modeloSelecionado = (FipeModelo) parent.getItemAtPosition(position);
-                                //buscarAnoModelo();
+                                buscarAnoModelo();
                             } else {
                                 modeloSelecionado = null;
                                 binding.fipeSpinnerAno.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, new ArrayList<>()));
@@ -225,6 +223,63 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onFailure(Call<FipeResponseModelo> call, Throwable t) {
+                Log.e("Error", "" + t.getMessage());
+            }
+        });
+    }
+
+    private void buscarAnoModelo() {
+        if (modeloSelecionado == null) {
+            return;
+        }
+
+        FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue(), modeloSelecionado.getValue());
+
+        Call<List<FipeAnoModelo>> call = this.fipeService.getAnoModelo(fipeRequestBody);
+
+        call.enqueue(new Callback<List<FipeAnoModelo>>() {
+            @Override
+            public void onResponse(Call<List<FipeAnoModelo>> call, Response<List<FipeAnoModelo>> response) {
+                if (response.isSuccessful()) {
+                    Log.i("FipeService", "Retornou " + response.body().size() + " anos de modelo.");
+
+                    if (response.body().size() == 0) {
+                        Toast.makeText(getActivity(), "Nenhum ano de modelo foi encontrado.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    List<FipeAnoModelo> anosModelo = new ArrayList<FipeAnoModelo>();
+                    FipeAnoModelo anoModeloDefault = new FipeAnoModelo();
+                    anoModeloDefault.setLabel("Selecione...");
+                    anosModelo.add(anoModeloDefault);
+                    anosModelo.addAll(response.body());
+
+                    SearchableSpinner fipeSpinnerAno = binding.fipeSpinnerAno;
+                    fipeSpinnerAno.setAdapter(new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_dropdown_item, anosModelo));
+
+                    fipeSpinnerAno.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            Log.i("onItemSelected", "Selecionou o ano de modelo na posição " + position + ".");
+                            if (position > 0) {
+                                anoModeloSelecionado = (FipeAnoModelo) parent.getItemAtPosition(position);
+                            } else {
+                                anoModeloSelecionado = null;
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+                        }
+                    });
+                } else {
+                    Log.e("Error", "" + response.message());
+                    Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FipeAnoModelo>> call, Throwable t) {
                 Log.e("Error", "" + t.getMessage());
             }
         });

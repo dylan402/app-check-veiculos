@@ -4,9 +4,7 @@ public class FipeAnoModelo {
     private String Label;
     private String Value;
 
-    public FipeAnoModelo(String label, String value) {
-        Label = label;
-        Value = value;
+    public FipeAnoModelo() {
     }
 
     public String getLabel() {

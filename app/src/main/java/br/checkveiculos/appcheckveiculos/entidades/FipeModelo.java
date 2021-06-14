@@ -2,7 +2,7 @@ package br.checkveiculos.appcheckveiculos.entidades;
 
 public class FipeModelo {
     private String Label;
-    private int Value;
+    private String Value;
 
     public FipeModelo() {
     }
@@ -15,11 +15,11 @@ public class FipeModelo {
         Label = label;
     }
 
-    public int getValue() {
+    public String getValue() {
         return Value;
     }
 
-    public void setValue(int value) {
+    public void setValue(String value) {
         Value = value;
     }
 
