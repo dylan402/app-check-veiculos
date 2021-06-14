@@ -10,7 +10,7 @@
             android:title="@string/menu_veiculos" />
         <item
             android:id="@+id/nav_fipe_consulta"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_menu_fipe_consulta"
             android:title="@string/menu_fipe_consulta" />
     </group>
 </menu>
