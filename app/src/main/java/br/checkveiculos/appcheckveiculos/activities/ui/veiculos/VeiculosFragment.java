@@ -103,6 +103,12 @@ public class VeiculosFragment extends Fragment {
                     VeiculosAdapter veiculosAdapter = new VeiculosAdapter(getActivity(), veiculos);
                     listViewVeiculos.setAdapter(veiculosAdapter);
 
+                    if (veiculos.size() == 0) {
+                        binding.textViewNotFoundVeiculos.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.textViewNotFoundVeiculos.setVisibility(View.GONE);
+                    }
+
                     listViewVeiculos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

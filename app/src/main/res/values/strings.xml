@@ -24,4 +24,5 @@
     <string name="fipe_text_modelo">Modelo do veículo</string>
     <string name="fipe_text_ano">Ano do veículo</string>
     <string name="fipe_btn_consultar">Consultar</string>
+    <string name="veiculos_not_found">Nenhum veículo encontrado.</string>
 </resources>
