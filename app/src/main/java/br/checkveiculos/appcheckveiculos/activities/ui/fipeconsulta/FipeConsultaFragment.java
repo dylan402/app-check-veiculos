@@ -64,8 +64,9 @@ public class FipeConsultaFragment extends Fragment {
         binding.fipeButtonConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String anoModelo = anoModeloSelecionado.getValue().substring(0, 3);
-                String tipoCombustivel = anoModeloSelecionado.getValue().substring(3);
+                String anoModelo = anoModeloSelecionado.getValue().substring(0, 4);
+                String tipoCombustivel = anoModeloSelecionado.getValue().substring(5);
+
                 FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue(), modeloSelecionado.getValue(), anoModelo, tipoCombustivel, "carro", "tradicional");
 
                 Call<FipeConsulta> call = fipeService.getFipeVeiculo(fipeRequestBody);
