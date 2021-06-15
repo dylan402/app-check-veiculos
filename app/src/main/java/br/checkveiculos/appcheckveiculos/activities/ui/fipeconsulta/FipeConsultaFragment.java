@@ -8,9 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -70,6 +72,7 @@ public class FipeConsultaFragment extends Fragment {
                 FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue(), modeloSelecionado.getValue(), anoModelo, tipoCombustivel, "carro", "tradicional");
 
                 Call<FipeConsulta> call = fipeService.getFipeVeiculo(fipeRequestBody);
+                exibirLoading(true);
 
                 call.enqueue(new Callback<FipeConsulta>() {
                     @Override
@@ -78,11 +81,15 @@ public class FipeConsultaFragment extends Fragment {
                             Log.i("FipeService", "Consultou um veículo na api da fipe.");
                             Log.i("FipeService", "Consulta=" + response.body().toString());
 
+
                             Intent intent = new Intent(getActivity(), FipeConsultaActivity.class);
                             intent.putExtra("consulta", response.body());
                             startActivity(intent);
+                            exibirLoading(false);
                         } else {
                             Log.e("Error", "" + response.message());
+                            exibirLoading(false);
+
                             Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
                         }
                     }
@@ -90,6 +97,7 @@ public class FipeConsultaFragment extends Fragment {
                     @Override
                     public void onFailure(Call<FipeConsulta> call, Throwable t) {
                         Log.e("Error", "" + t.getMessage());
+                        exibirLoading(false);
                     }
                 });
             }
@@ -101,6 +109,19 @@ public class FipeConsultaFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    private void exibirLoading(boolean exibir) {
+        AppCompatButton fipeButtonConsulta = binding.fipeButtonConsulta;
+        ProgressBar fipeProgressBar = binding.fipeProgressBar;
+
+        if (exibir == true) {
+            fipeButtonConsulta.setVisibility(View.GONE);
+            fipeProgressBar.setVisibility(View.VISIBLE);
+        } else {
+            fipeButtonConsulta.setVisibility(View.VISIBLE);
+            fipeProgressBar.setVisibility(View.GONE);
+        }
     }
 
     private void buscarMesesReferencia() {
