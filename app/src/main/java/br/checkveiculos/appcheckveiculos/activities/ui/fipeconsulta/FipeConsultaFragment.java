@@ -1,5 +1,6 @@
 package br.checkveiculos.appcheckveiculos.activities.ui.fipeconsulta;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import br.checkveiculos.appcheckveiculos.api.FipeService;
 import br.checkveiculos.appcheckveiculos.api.RestServiceGenerator;
 import br.checkveiculos.appcheckveiculos.databinding.FragmentFipeConsultaBinding;
 import br.checkveiculos.appcheckveiculos.entidades.FipeAnoModelo;
+import br.checkveiculos.appcheckveiculos.entidades.FipeConsulta;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMarca;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMesRerefencia;
 import br.checkveiculos.appcheckveiculos.entidades.FipeModelo;
@@ -58,6 +60,39 @@ public class FipeConsultaFragment extends Fragment {
         binding.fipeSpinnerAno.setTitle("Selecione o ano do modelo");
 
         this.buscarMesesReferencia();
+
+        binding.fipeButtonConsulta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String anoModelo = anoModeloSelecionado.getValue().substring(0, 3);
+                String tipoCombustivel = anoModeloSelecionado.getValue().substring(3);
+                FipeRequestBody fipeRequestBody = new FipeRequestBody(1, mesRerefenciaSelecionado.getCodigo(), marcaSelecionada.getValue(), modeloSelecionado.getValue(), anoModelo, tipoCombustivel, "carro", "tradicional");
+
+                Call<FipeConsulta> call = fipeService.getFipeVeiculo(fipeRequestBody);
+
+                call.enqueue(new Callback<FipeConsulta>() {
+                    @Override
+                    public void onResponse(Call<FipeConsulta> call, Response<FipeConsulta> response) {
+                        if (response.isSuccessful()) {
+                            Log.i("FipeService", "Consultou um veículo na api da fipe.");
+                            Log.i("FipeService", "Consulta=" + response.body().toString());
+
+                            Intent intent = new Intent(getActivity(), FipeConsultaActivity.class);
+                            intent.putExtra("consulta", response.body());
+                            startActivity(intent);
+                        } else {
+                            Log.e("Error", "" + response.message());
+                            Toast.makeText(getContext().getApplicationContext(), "Erro: " + response.message(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<FipeConsulta> call, Throwable t) {
+                        Log.e("Error", "" + t.getMessage());
+                    }
+                });
+            }
+        });
         return root;
     }
 

@@ -3,6 +3,7 @@ package br.checkveiculos.appcheckveiculos.api;
 import java.util.List;
 
 import br.checkveiculos.appcheckveiculos.entidades.FipeAnoModelo;
+import br.checkveiculos.appcheckveiculos.entidades.FipeConsulta;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMarca;
 import br.checkveiculos.appcheckveiculos.entidades.FipeMesRerefencia;
 import br.checkveiculos.appcheckveiculos.entidades.FipeRequestBody;
@@ -40,4 +41,11 @@ public interface FipeService {
     })
     @POST("veiculos/ConsultarAnoModelo")
     Call<List<FipeAnoModelo>> getAnoModelo(@Body FipeRequestBody fipeRequestBody);
+
+    @Headers({
+            "Accept: application/json",
+            "User-Agent: AppCheckVeiculos"
+    })
+    @POST("veiculos/ConsultarValorComTodosParametros")
+    Call<FipeConsulta> getFipeVeiculo(@Body FipeRequestBody fipeRequestBody);
 }

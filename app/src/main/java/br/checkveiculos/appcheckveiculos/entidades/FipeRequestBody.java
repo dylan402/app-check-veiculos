@@ -5,6 +5,10 @@ public class FipeRequestBody {
     private int codigoTabelaReferencia;
     private String codigoMarca;
     private String codigoModelo;
+    private String anoModelo;
+    private String codigoTipoCombustivel;
+    private String tipoVeiculo;
+    private String tipoConsulta;
 
     public FipeRequestBody(int codigoTipoVeiculo, int codigoTabelaReferencia) {
         this.codigoTipoVeiculo = codigoTipoVeiculo;
@@ -22,6 +26,17 @@ public class FipeRequestBody {
         this.codigoTabelaReferencia = codigoTabelaReferencia;
         this.codigoMarca = codigoMarca;
         this.codigoModelo = codigoModelo;
+    }
+
+    public FipeRequestBody(int codigoTipoVeiculo, int codigoTabelaReferencia, String codigoMarca, String codigoModelo, String anoModelo, String codigoTipoCombustivel, String tipoVeiculo, String tipoConsulta) {
+        this.codigoTipoVeiculo = codigoTipoVeiculo;
+        this.codigoTabelaReferencia = codigoTabelaReferencia;
+        this.codigoMarca = codigoMarca;
+        this.codigoModelo = codigoModelo;
+        this.anoModelo = anoModelo;
+        this.codigoTipoCombustivel = codigoTipoCombustivel;
+        this.tipoVeiculo = tipoVeiculo;
+        this.tipoConsulta = tipoConsulta;
     }
 
     public int getCodigoTipoVeiculo() {
@@ -54,5 +69,37 @@ public class FipeRequestBody {
 
     public void setCodigoModelo(String codigoModelo) {
         this.codigoModelo = codigoModelo;
+    }
+
+    public String getAnoModelo() {
+        return anoModelo;
+    }
+
+    public void setAnoModelo(String anoModelo) {
+        this.anoModelo = anoModelo;
+    }
+
+    public String getCodigoTipoCombustivel() {
+        return codigoTipoCombustivel;
+    }
+
+    public void setCodigoTipoCombustivel(String codigoTipoCombustivel) {
+        this.codigoTipoCombustivel = codigoTipoCombustivel;
+    }
+
+    public String getTipoVeiculo() {
+        return tipoVeiculo;
+    }
+
+    public void setTipoVeiculo(String tipoVeiculo) {
+        this.tipoVeiculo = tipoVeiculo;
+    }
+
+    public String getTipoConsulta() {
+        return tipoConsulta;
+    }
+
+    public void setTipoConsulta(String tipoConsulta) {
+        this.tipoConsulta = tipoConsulta;
     }
 }
