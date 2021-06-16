@@ -60,6 +60,8 @@ public class FipeConsultaFragment extends Fragment {
         binding.fipeSpinnerMarca.setTitle("Selecione uma marca");
         binding.fipeSpinnerModelo.setTitle("Selecione um modelo");
         binding.fipeSpinnerAno.setTitle("Selecione o ano do modelo");
+        binding.fipeButtonConsulta.setAlpha(0.5f);
+        binding.fipeButtonConsulta.setEnabled(false);
 
         this.buscarMesesReferencia();
 
@@ -320,8 +322,12 @@ public class FipeConsultaFragment extends Fragment {
                             Log.i("onItemSelected", "Selecionou o ano de modelo na posição " + position + ".");
                             if (position > 0) {
                                 anoModeloSelecionado = (FipeAnoModelo) parent.getItemAtPosition(position);
+                                binding.fipeButtonConsulta.setAlpha(1f);
+                                binding.fipeButtonConsulta.setEnabled(true);
                             } else {
                                 anoModeloSelecionado = null;
+                                binding.fipeButtonConsulta.setAlpha(0.5f);
+                                binding.fipeButtonConsulta.setEnabled(false);
                             }
                         }
 
