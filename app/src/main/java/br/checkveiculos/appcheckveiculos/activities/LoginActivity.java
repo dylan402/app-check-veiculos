@@ -3,6 +3,8 @@ package br.checkveiculos.appcheckveiculos.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -79,12 +81,24 @@ public class LoginActivity extends AppCompatActivity {
     private boolean validarFormulario(Cliente cliente) {
         boolean valido = true;
 
+        EditText loginEditTextEmail = findViewById(R.id.loginEditTextEmail);
+        EditText loginEditTextSenha = findViewById(R.id.loginEditTextSenha);
+
+        GradientDrawable loginGradientEmail = (GradientDrawable) loginEditTextEmail.getBackground();
+        GradientDrawable loginGradientSenha = (GradientDrawable) loginEditTextSenha.getBackground();
+
         if (cliente.getEmail() == null || cliente.getEmail().trim().length() == 0) {
+            loginGradientEmail.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            loginGradientEmail.setStroke(6, Color.BLACK);
         }
 
         if (cliente.getSenha() == null || cliente.getSenha().trim().length() == 0) {
+            loginGradientSenha.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            loginGradientSenha.setStroke(6, Color.BLACK);
         }
 
         return valido;
