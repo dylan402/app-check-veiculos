@@ -3,6 +3,8 @@ package br.checkveiculos.appcheckveiculos.activities.ui.veiculos;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -102,25 +104,47 @@ public class FormVeiculoActivity extends AppCompatActivity {
     private boolean validarFormulario(Veiculo veiculo) {
         boolean valido = true;
 
-        if (veiculo.getMarca() == null || veiculo.getMarca().trim().length() == 0) {
+        EditText veiculoEditTextMarca = findViewById(R.id.veiculoEditTextMarca);
+        EditText veiculoEditTextModelo = findViewById(R.id.veiculoEditTextModelo);
+        EditText veiculoEditTextAno = findViewById(R.id.veiculoEditTextAno);
+        EditText veiculoEditTextPlaca = findViewById(R.id.veiculoEditTextPlaca);
+
+        GradientDrawable veiculoGradientMarca = (GradientDrawable) veiculoEditTextMarca.getBackground();
+        GradientDrawable veiculoGradientModelo = (GradientDrawable) veiculoEditTextModelo.getBackground();
+        GradientDrawable veiculoGradientAno = (GradientDrawable) veiculoEditTextAno.getBackground();
+        GradientDrawable veiculoGradientPlaca = (GradientDrawable) veiculoEditTextPlaca.getBackground();
+
+        if (veiculo.getIdCliente() == null || veiculo.getIdCliente().trim().length() == 0) {
             valido = false;
             Toast.makeText(this, "Não foi possível identificar o usuário.", Toast.LENGTH_SHORT).show();
         }
 
         if (veiculo.getMarca() == null || veiculo.getMarca().trim().length() == 0) {
+            veiculoGradientMarca.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            veiculoGradientMarca.setStroke(6, Color.BLACK);
         }
 
         if (veiculo.getModelo() == null || veiculo.getModelo().trim().length() == 0) {
+            veiculoGradientModelo.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            veiculoGradientModelo.setStroke(6, Color.BLACK);
         }
 
         if (veiculo.getAno() == null || veiculo.getAno().trim().length() == 0) {
+            veiculoGradientAno.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            veiculoGradientAno.setStroke(6, Color.BLACK);
         }
 
         if (veiculo.getPlaca() == null || veiculo.getPlaca().trim().length() == 0) {
+            veiculoGradientPlaca.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            veiculoGradientPlaca.setStroke(6, Color.BLACK);
         }
 
         return valido;
