@@ -9,8 +9,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestServiceGenerator {
     private static final String API_BASE_URL_CLIENTE = "http://10.0.2.2:8081/cliente-api/";
     private static final String API_BASE_URL_VEICULO = "http://10.0.2.2:8080/veiculo-api/";
-    //private static final String API_BASE_URL = "http://load-balancer-backend-cliente-1389281431.us-east-2.elb.amazonaws.com/cliente-api/";
-    //private static final String API_BASE_URL = "http://load-balancer-backend-cliente-1389281431.us-east-2.elb.amazonaws.com/veiculo-api/";
+    //private static final String API_BASE_URL_CLIENTE = "http://load-balancer-backend-cliente-1389281431.us-east-2.elb.amazonaws.com/cliente-api/";
+    //private static final String API_BASE_URL_VEICULO = "http://load-balancer-backend-cliente-1389281431.us-east-2.elb.amazonaws.com/veiculo-api/";
     private static final String API_BASE_URL_FIPE = "https://veiculos.fipe.org.br/api/";
 
     public static <S> S createServiceCliente(Class<S> serviceClass) {
