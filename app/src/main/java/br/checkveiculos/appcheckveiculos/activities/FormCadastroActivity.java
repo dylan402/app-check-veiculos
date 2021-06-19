@@ -3,6 +3,8 @@ package br.checkveiculos.appcheckveiculos.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -66,16 +68,33 @@ public class FormCadastroActivity extends AppCompatActivity {
     private boolean validarFormulario(Cliente cliente) {
         boolean valido = true;
 
+        EditText clienteEditTextNome = findViewById(R.id.clienteEditTextNome);
+        EditText clienteEditTextEmail = findViewById(R.id.clienteEditTextEmail);
+        EditText clienteEditTextSenha = findViewById(R.id.clienteEditTextSenha);
+
+        GradientDrawable clienteGradientNome = (GradientDrawable) clienteEditTextNome.getBackground();
+        GradientDrawable clienteGradientEmail = (GradientDrawable) clienteEditTextEmail.getBackground();
+        GradientDrawable clienteGradientSenha = (GradientDrawable) clienteEditTextSenha.getBackground();
+
         if (cliente.getNome() == null || cliente.getNome().trim().length() == 0) {
+            clienteGradientNome.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            clienteGradientNome.setStroke(6, Color.BLACK);
         }
 
         if (cliente.getEmail() == null || cliente.getEmail().trim().length() == 0) {
+            clienteGradientEmail.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            clienteGradientEmail.setStroke(6, Color.BLACK);
         }
 
         if (cliente.getSenha() == null || cliente.getSenha().trim().length() == 0) {
+            clienteGradientSenha.setStroke(6, Color.RED);
             valido = false;
+        } else {
+            clienteGradientSenha.setStroke(6, Color.BLACK);
         }
 
         return valido;
